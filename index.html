@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>من ليل الهوى إلى نهار المحجّة</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#0b1230;--bg2:#1d2a5c;--ink:#eef1ff;--gold:#f2c14e;--fs:1.7rem}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 150px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Amiri,serif;color:var(--ink);background:linear-gradient(var(--bg1),var(--bg2)) fixed var(--bg1);min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg1)}
+#st{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 30% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 12%,#fff,transparent),radial-gradient(1px 1px at 72% 35%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 70%,#fff,transparent),radial-gradient(1px 1px at 8% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 75%,#fff,transparent)}
+#orb{position:fixed;width:64px;height:64px;border-radius:50%;pointer-events:none;opacity:.8;filter:blur(.5px)}
+header{text-align:center;padding:2.2rem 1rem 1rem;position:relative}
+h1{font-family:'Aref Ruqaa',serif;font-size:2.4rem;margin:0 0 .3rem;line-height:1.5}
+header p{margin:0;opacity:.75;font-size:1.1rem}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:0 auto;max-width:760px;padding:.6rem .9rem;border-radius:0 0 18px 18px;background:color-mix(in srgb,var(--bg1) 80%,transparent);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-top:0}
+#yt{max-width:300px;margin:0 auto .5rem;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0006}
+#yt iframe{width:100%;height:100%}
+#note{font-size:.95rem;padding:.8rem;text-align:center;opacity:.85}
+.ctl{display:flex;gap:.5rem;align-items:center}
+button,.ctl a{font:inherit;color:var(--ink);background:color-mix(in srgb,var(--ink) 12%,transparent);border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);border-radius:10px;padding:.2rem .7rem;cursor:pointer;text-decoration:none;font-size:1.05rem}
+button:focus-visible,input:focus-visible,.v:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#pl{min-width:3rem;font-size:1.3rem}
+input[type=range]{flex:1;accent-color:var(--gold);direction:ltr}
+#tm{font-size:.95rem;min-width:3.2rem;text-align:center;direction:ltr}
+main{max-width:760px;margin:0 auto;padding:1rem 1rem 30vh}
+h2{font-family:'Aref Ruqaa',serif;font-size:1.5rem;text-align:center;margin:3.2rem 0 1rem;color:var(--gold);font-weight:700}
+.v{margin:.8rem 0;padding:1rem 1rem .8rem;border-radius:18px;cursor:pointer;opacity:.62;background:color-mix(in srgb,var(--ink) 5%,transparent);border:1px solid transparent;transition:opacity .4s,background .4s,transform .4s}
+.v.on{opacity:1;transform:scale(1.02);background:color-mix(in srgb,var(--ink) 11%,transparent);border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+.sh{display:flex;flex-wrap:wrap;justify-content:center;gap:.1em 2.4em;font-size:var(--fs);line-height:1.9}
+.s{color:var(--ink)}
+.on .s{background:linear-gradient(to left,var(--gold) var(--p,0%),var(--ink) var(--p,0%));-webkit-background-clip:text;background-clip:text;color:transparent}
+.n{text-align:center;font-size:.9rem;opacity:.6}
+.m{max-height:0;overflow:hidden;text-align:center;font-size:1.1rem;opacity:.85;transition:max-height .5s,margin .5s}
+.on .m,.open .m{max-height:8em;margin-top:.6rem;border-top:1px dashed color-mix(in srgb,var(--ink) 30%,transparent);padding-top:.5rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div id="st"></div><div id="orb"></div>
+<header><h1>من ليل الهوى إلى نهار المحجّة</h1><p>ألا لا على العاشقين جناح — إيهاب الشباطات</p></header>
+<div id="bar">
+<div id="yt"><div id="yp"></div></div><div id="note" hidden></div>
+<div class="ctl"><button id="pl" aria-label="تشغيل">▶</button><input id="rg" type="range" min="0" max="336" value="0" aria-label="الموضع"><span id="tm">0:00</span>
+<button id="tk" title="التشكيل">تشكيل</button><button id="fp" aria-label="تكبير الخط">+أ</button><button id="fm" aria-label="تصغير الخط">−أ</button></div></div>
+<main id="list"></main>
+<script>
+const P=`أَلا لا عَلى العاشِقينَ جُناحُ
+سَواءٌ أَسَرُّوا الهَوى أَمْ أَباحوا
+أَسَرَّ اللِّسانُ فَأَنَّى العُيونُ
+إِذا مَرَّ طَيْفُ الحَبيبِ تُشاحُ؟!
+تَثَنَّتْ أَمامي بِداجِيَةٍ
+وَفَوْقي لَها بِالخُسوفِ جَناحُ
+لِأَشْهَدَ شَمْسًا بِلَيْلٍ تُزانُ
+كَأَنَّ اللَّيالي لِجِيدٍ وِشاحُ
+لَها ريحُ وَرْدٍ بِقَطْرِ النَّدى
+فَجاءَ قُبَيْلَ الصَّباحِ صَباحُ
+تَسيرُ الهُوَيْنى بِهَدْءِ المَساءِ
+وَتَعْصِفُ وَجْدًا بِقَلْبي الرِّياحُ
+وَسَلَّمَ كَفٌّ وَعَيْنٌ رَمَتْ
+أَبَعْدَ السَّلامِ دِمائي تُباحُ؟!
+كَأَنَّ عُيونَ الغَواني حِمًى
+عَزيزٌ حَوالَيْهِ تُرْمى الرِّماحُ
+رُمِيتُ بِكُلِّ البَلايا فَما
+كَجُرْحِ الهَوى رافَقَتْني جِراحُ
+وَأَذْنَبْتُ جُلَّ الذُّنوبِ وَتُبْتُ
+وَتَوْبُ الهَوى لَيْسَ فيهِ سَماحُ
+فَأَمّا هَوى ابْنِ أَخي حَمْزَةٍ
+فَإِنَّ المُقامَ عَلَيْهِ فَلاحُ
+ذَروني وَهَمّي فَإِنَّ الجُفونَ
+سَحابٌ حَياها عَلَيْهِ شَحاحُ
+وَأَنْدى عُيوني نَوى الظّاعِنينَ
+وَحَرَّ كُبَيْدي إِذا هُمْ أَلاحوا
+إِذا ما تَذَكَّرْتُ رَكْبًا مَضى
+بَدا المُصْطَفى قَبْلَ مَنْ فيهِ راحوا
+رَسولٌ مِنَ اللهِ بِالحَقِّ سارَ
+فَصابَ البَواطِلَ مِنْهُ كُساحُ
+بَريءُ العُيوبِ جَريءُ الحُروبِ
+عَلى أَنَّ عُقْبى الغِلابِ صِفاحُ
+أَذَلَّ الطُّغاةَ بِسَيْفٍ، وَحازَ
+قُلوبًا وَما في يَدَيْهِ سِلاحُ!
+فَما دَمِيَ الحَقُّ إِلّا ظَنَنْتُ
+بِأَنَّ دِما أَصْغَرَيْهِ تُساحُ
+فَدَيْتُ القُلوبَ الَّتي مَسَّها
+زِنادٌ مِنَ الحَقِّ فيها اقْتِداحُ
+كَأَنّا بُعَيْدَ وِلادَتِهِ
+مُيَأَّسُ طِبٍّ شَفاهُ لِقاحُ
+كَأَنّا بُعَيْدَ مَنِيَّتِهِ
+دِيارٌ تَأَبَّدَ عَنْها اصْطِباحُ
+فَكَمْ حَمِيَتْ فَوْقَهُ غَيْمَةٌ
+رَأَتْ خُفَّهُ بَرَّدَتْهُ البِطاحُ!
+مِنَ الإِنْسِ لكِنْ نُقاوَتُهُمْ
+فَبَعْضُ حَشا النَّحْلِ شَهْدٌ قَراحُ
+نَبِيَّ الهُدى في الفُؤادِ هَواكَ
+فَما أَلْسُنُ الإِنْسِ فيهِ فِساحُ
+أَلا اعْذِرْ بَناتِ لِساني إِذا
+وَصَلْنَ إِلَيْكَ وَهُنَّ قِباحُ
+بَلاغَةُ وَحْيَيْنِ حُسْنًا عَلَتْ
+وَمِنْ فَرْطِ حُسْنٍ قَبُحْنَ المِلاحُ!
+وَبَيْضاءَ سُبْلٍ تَرَكْتَ لَنا
+وَفيها الدُّجى كَالنَّهارِ صِراحُ
+وَبَيْضاءُ ما مَدْحُها وَشْيُها
+وَلكِنْ بِها السّائِرونَ صِباحُ
+فَما زانَ غَيْمًا وَلا شانَهُ
+تَلَوُّنُهُ، وَالغُيوثُ سِحاحُ
+وَلَوْلا سَوادٌ يَسودُ القُلوبَ
+لَما أُخْطِئَتْ في العُيونِ الصِّحاحُ
+بَلَغْتَ مِنَ الحَقِّ أَجْلى السَّنا
+بِكَرِّ الجَديدَيْنِ شَمْسًا تُتاحُ
+حَيِيتَ فَقيدًا وَظَلَّ هُداكَ
+شَذاهُ بِمَرِّ العُصورِ يُفاحُ
+أَلَيْسَ الحَياءُ عَلى المُتَّقينَ
+نَداكَ، لَهُ في الوُجوهِ ارْتِشاحُ؟
+أَلانَتْ يَداكَ نُفوسًا قَسَتْ
+فَلانَ الشَّكيمُ وَزالَ الجِماحُ
+لِجامُ الهُدى رَدَّ أَفْئِدَةً
+فَتَمَّ لَنا لا عَلَيْنا الرَّباحُ
+خُطى الأَنْبِياءِ بِقَفْوِ الصِّحابِ
+مَنائِرُ لَيْلٍ كَساها لِياحُ
+صِحابُكَ أَوْلى بِذِكْرٍ إِذا
+أَتى صاحِبٌ أَوْ دَعاهُ بَراحُ
+هُمُ النَّبْلُ في قَوْسِ خَيْرِ الوَرى
+يَدُ اللهِ تَرْمي فَنِيلَ الصَّلاحُ
+بِبيضِ السُّيوفِ وَسودِ المُتونِ
+ظَلامًا عَنِ المَشْرِقَيْنِ أَزاحوا
+سَلامُ السَّلامِ عَلى المُصْطَفى
+وَعَلَّ السَّلامَ إِلَيْنا رَواحُ`.split('\n');
+const M=["لا لوم على المحبين، أخفَوا حبهم أو أظهروه.","اللسان يكتم السر، فكيف تكتمه العين إذا مرّ طيف الحبيب؟","مشت أمامي في ليلة حالكة، وخسف القمر فوقي فاحتجب لغلبة حسنها.","أخفت القمر لأراها شمسًا في الليل، والليالي لعنقها كالوشاح.","لها عبق ورد بنداه، فجاء الصباح قبل أوانه.","تمشي متمهلة في سكون المساء، وفي قلبي ريح وجد عاصفة.","سلّمت بكفها ورمت بعينها: أيُستباح دمي بعد السلام؟","عيون الحسان حمى عزيز، تُرمى الرماح حوله.","أصابتني كل البلايا، وما جرح كجرح الهوى.","تبت من جلّ الذنوب إلا الهوى، لا تطاوعني نفسي على التوبة منه.","أما هوى النبي ﷺ ابن أخي حمزة، فالمقام عليه فلاح.","دعوني وهمّي: شوقي إليه أكبر من أن تفيه دموعي الشحيحة.","بكيت فراق الراحلين، وحرّت كبدي حين لوّحوا مودّعين.","كلما تذكرت ركبًا مضى، بدا لي المصطفى ﷺ قبل كل راحل.","رسول مضى بالحق، فأصاب الباطل بداء يقعده.","بريء من العيوب، شجاع في الحروب، وعاقبة غلابه الصفح.","قهر الطغاة بالسيف، وملك القلوب بلا سلاح.","كأن الحق إذا جُرح أُريقت دماء قلبه ولسانه ﷺ.","فديت القلوب التي مسّها زناد الحق فاشتعل فيها النور.","كأننا عند مولده مريض يائس جاءه لقاح فشفاه.","وبعد وفاته كديار أقفرت وانطفأ سراجها.","غيمة غارت فوقه، وحين رأت نعله بردته البطاح.","من جنس الإنس، لكنه خيارهم، كالشهد الخالص في بطن النحل.","حبك يملأ القلب، وألسنة البشر تضيق عنه.","اعذر كلماتي إن بلغتك قبيحة، فهي قاصرة عن جمال مقامك.","بلاغة القرآن والسنة بلغت الغاية، فكل كلام سواها يبدو قبيحًا بجوارها.","تركت لنا محجّة بيضاء، ليلها كنهارها.","البيضاء لا يزيدها المدح زينة، وأثرها في سالكيها.","الغيم لا يزيده تلوّنه حسنًا ولا شينًا، والعبرة بغيثه المنهمر.","لولا ذنوب تسوّد القلوب لما أخطأت العيون الصحيحة؛ فالعمى عمى القلوب.","بلغت أوضح ضياء الحق، شمسًا تتاح بتعاقب الليل والنهار.","حييت فقيدًا، وهداك باقٍ شذاه يفوح على مر العصور.","أليس الحياء الذي يعلو وجوه المتقين من أثر كرمك؟","لانت يداك لنفوس قاسية، فلان الجموح وزال العناد.","لجام الهدى ردّ القلوب عن أهوائها، فكان الربح لنا لا علينا.","آثار الأنبياء وفوقها آثار الصحابة: منارات في ليل الجهالة.","صحابتك أولى بالذكر كلما جاء صاحب أو فارق.","هم السهام في قوس النبي ﷺ، ويد الله ترمي، فنالوا الصلاح.","بالسيوف والكتب أزاحوا الظلام عن المشرقين.","السلام على المصطفى ﷺ، ولعل السلام يروح إلينا."];
+const H={0:"العتاب والكتمان",2:"ليل الهوى",10:"هوى المصطفى ﷺ",14:"رسول الحق",19:"ميلاد النور وفقده",24:"بلاغة الوحيين والمحجّة",30:"نور لا يغيب",36:"الصحب والفتح والسلام"};
+const S=[0,16,25,32,41,50,59,67,75,83,91,99,107,115,124,132,142,149,157,166,174,181,189,197,206,215,223,231,238,246,254,261,270,279,286,293,301,308,317,327],END=336;
+const C=[[0,0],[0,8]];S.slice(1).forEach((t,i)=>C.push([i+1,t]));
+const L=document.getElementById('list'),V=[],strip=s=>s.replace(/[\u064B-\u0652\u0670]/g,'');let tk=true;
+for(let i=0;i<40;i++){
+ if(H[i]){const h=document.createElement('h2');h.textContent=H[i];L.append(h)}
+ const d=document.createElement('div');d.className='v';d.tabIndex=0;
+ d.innerHTML=`<div class="n">${(i+1).toLocaleString('ar-EG')}</div><div class="sh"><span class="s"></span><span class="s"></span></div><div class="m">${M[i]}</div>`;
+ d.querySelectorAll('.s').forEach((s,j)=>{s.dataset.f=P[2*i+j];s.textContent=P[2*i+j]});
+ const go=()=>{seek(C.find(c=>c[0]==i)[1]);d.classList.toggle('open');if(!ready&&!playing)toggle()};
+ d.onclick=go;d.onkeydown=e=>{if(e.key=='Enter')go()};L.append(d);V.push(d)}
+let yt,ready=false,sim=0,last=0,playing=false,act=-1,sp=0;
+const cur=()=>ready?yt.getCurrentTime():sim,seek=t=>{ready?yt.seekTo(t,true):sim=t;last=performance.now()};
+function toggle(){if(ready){yt.getPlayerState()==1?yt.pauseVideo():yt.playVideo()}else{playing=!playing;last=performance.now()}}
+const note=document.getElementById('note');
+function fallback(){if(ready)return;document.getElementById('yt').hidden=true;note.hidden=false;note.innerHTML='وضع المحاكاة: الأبيات تتحرك بساعة داخلية بنفس التوقيتات. لتشغيل الفيديو الحقيقي افتح الملف من خادم محلي أو GitHub Pages، أو <a style="color:var(--gold)" href="https://youtu.be/tNtwyDZnMQw" target="_blank" rel="noopener">افتحه في يوتيوب</a>.'}
+const sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.onerror=fallback;document.head.append(sc);setTimeout(fallback,4000);
+window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yp',{videoId:'tNtwyDZnMQw',playerVars:{playsinline:1},events:{onReady:()=>{ready=true;note.hidden=true;document.getElementById('yt').hidden=false},onStateChange:e=>playing=e.data==1}})};
+const K=[[0,[11,18,48],[29,42,92],[238,241,255],[242,193,78]],[.4,[59,42,88],[196,110,110],[255,244,232],[255,214,120]],[.75,[250,232,200],[200,228,240],[42,36,24],[179,107,0]],[1,[255,247,226],[190,226,240],[42,36,24],[179,107,0]]];
+const mix=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t)),rgb=a=>`rgb(${a})`,R=document.documentElement.style,orb=document.getElementById('orb'),st=document.getElementById('st');
+function sky(p){let k=0;while(k<K.length-2&&p>K[k+1][0])k++;const a=K[k],b=K[k+1],t=Math.min(1,Math.max(0,(p-a[0])/(b[0]-a[0])));
+ ['--bg1','--bg2','--ink','--gold'].forEach((n,i)=>R.setProperty(n,rgb(mix(a[i+1],b[i+1],t))));
+ st.style.opacity=Math.max(0,1-p*1.8);const o=mix([232,236,255],[255,205,90],Math.min(1,p*1.3));
+ orb.style.background=`radial-gradient(circle at 35% 35%,${rgb(o)},${rgb(mix(o,[255,255,255],.2))} 60%)`;
+ orb.style.boxShadow=`0 0 ${20+p*70}px ${rgb(o)}`;orb.style.left=(12+p*72)+'%';orb.style.top=(14-p*5)+'vh'}
+const rg=document.getElementById('rg'),pl=document.getElementById('pl'),tm=document.getElementById('tm');
+function tick(now){
+ if(!ready&&playing){sim+=(now-last)/1000;last=now;if(sim>END){sim=END;playing=false}}
+ const t=cur()||0;let k=0;while(k+1<C.length&&C[k+1][1]<=t)k++;
+ const [vi,s]=C[k],e=k+1<C.length?C[k+1][1]:END,f=Math.min(1,(t-s)/((e-s)*.9));
+ if(vi!==act){V.forEach((v,i)=>v.classList.toggle('on',i==vi));act=vi;if(playing)V[vi].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'})}
+ const s2=V[vi].querySelectorAll('.s');s2[0].style.setProperty('--p',Math.min(100,f*200)+'%');s2[1].style.setProperty('--p',Math.max(0,Math.min(100,f*200-100))+'%');
+ pl.textContent=playing?'⏸':'▶';rg.value=t;tm.textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+ sky(playing?(vi+f)/40:sp);requestAnimationFrame(tick)}
+addEventListener('scroll',()=>{sp=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)},{passive:true});
+pl.onclick=toggle;rg.oninput=()=>seek(+rg.value);
+document.getElementById('tk').onclick=()=>{tk=!tk;document.querySelectorAll('.s').forEach(s=>s.textContent=tk?s.dataset.f:strip(s.dataset.f))};
+let fs=1.7;const fz=d=>R.setProperty('--fs',(fs=Math.min(2.6,Math.max(1.1,fs+d)))+'rem');
+document.getElementById('fp').onclick=()=>fz(.15);document.getElementById('fm').onclick=()=>fz(-.15);
+requestAnimationFrame(tick);
+</script></body></html>
