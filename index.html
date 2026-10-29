@@ -9,12 +9,12 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 150px)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Amiri,serif;color:var(--ink);background:linear-gradient(var(--bg1),var(--bg2)) fixed var(--bg1);min-height:100vh}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg1)}
-#st{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 30% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 12%,#fff,transparent),radial-gradient(1px 1px at 72% 35%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 70%,#fff,transparent),radial-gradient(1px 1px at 8% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 75%,#fff,transparent)}
-#orb{position:fixed;width:64px;height:64px;border-radius:50%;pointer-events:none;opacity:.8;filter:blur(.5px)}
+#st{position:fixed;z-index:-1;inset:0;pointer-events:none;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 30% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 12%,#fff,transparent),radial-gradient(1px 1px at 72% 35%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 70%,#fff,transparent),radial-gradient(1px 1px at 8% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 75%,#fff,transparent)}
+#orb{position:fixed;z-index:-1;width:64px;height:64px;border-radius:50%;pointer-events:none;opacity:.8;filter:blur(.5px)}
 header{text-align:center;padding:2.2rem 1rem 1rem;position:relative}
 h1{font-family:'Aref Ruqaa',serif;font-size:2.4rem;margin:0 0 .3rem;line-height:1.5}
 header p{margin:0;opacity:.75;font-size:1.1rem}
-#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:0 auto;max-width:760px;padding:.6rem .9rem;border-radius:0 0 18px 18px;background:color-mix(in srgb,var(--bg1) 80%,transparent);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-top:0}
+#bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 6px);z-index:5;margin:0 auto;max-width:760px;padding:.6rem .9rem;border-radius:26px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.02) 45%,rgba(255,255,255,.09));backdrop-filter:blur(1.5px) saturate(180%) brightness(1.1);-webkit-backdrop-filter:blur(1.5px) saturate(180%) brightness(1.1);border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.14),0 10px 34px rgba(0,0,0,.22)}
 #yt{max-width:300px;margin:0 auto .5rem;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0006}
 #yt iframe{width:100%;height:100%}
 #note{font-size:.95rem;padding:.8rem;text-align:center;opacity:.85}
@@ -34,6 +34,13 @@ h2{font-family:'Aref Ruqaa',serif;font-size:1.5rem;text-align:center;margin:3.2r
 .n{text-align:center;font-size:.9rem;opacity:.6}
 .m{max-height:0;overflow:hidden;text-align:center;font-size:1.1rem;opacity:.85;transition:max-height .5s,margin .5s}
 .on .m,.open .m{max-height:8em;margin-top:.6rem;border-top:1px dashed color-mix(in srgb,var(--ink) 30%,transparent);padding-top:.5rem}
+.w{text-decoration:underline dotted;text-decoration-color:var(--gold);text-underline-offset:.3em;cursor:help}
+#tip{position:fixed;display:none;z-index:20;max-width:240px;padding:.4rem .75rem;border-radius:14px;font-size:1rem;line-height:1.6;color:var(--ink);background:rgba(255,255,255,.16);backdrop-filter:blur(10px) saturate(170%);-webkit-backdrop-filter:blur(10px) saturate(170%);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 24px rgba(0,0,0,.25)}
+.x{display:none;margin-top:.6rem;border-top:1px dashed color-mix(in srgb,var(--ink) 30%,transparent);padding-top:.5rem;font-size:1.1rem;line-height:1.9;text-align:right}
+.on .x,.open .x{display:block}
+.x .b{position:relative;overflow:hidden}
+.x.long:not(.full) .b{max-height:4.3em}
+.x.long:not(.full) .b::after{content:"";position:absolute;inset:auto 0 0;height:2em;background:linear-gradient(transparent,var(--bg2))}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <div id="st"></div><div id="orb"></div>
@@ -129,11 +136,19 @@ const H={0:"العتاب والكتمان",2:"ليل الهوى",10:"هوى ال
 const S=[0,16,25,32,41,50,59,67,75,83,91,99,107,115,124,132,142,149,157,166,174,181,189,197,206,215,223,231,238,246,254,261,270,279,286,293,301,308,317,327],END=336;
 const C=[[0,0],[0,8]];S.slice(1).forEach((t,i)=>C.push([i+1,t]));
 const L=document.getElementById('list'),V=[],strip=s=>s.replace(/[\u064B-\u0652\u0670]/g,'');let tk=true;
+const E={0:[`لا إثمَ ولا لومَ على المحبّين، سواء: أَأَخفَوا حبَّهم أم أظهروه.`,{}],
+1:[`كتم اللسانُ السرّ، فكيف للعين أن تُصرف وتُنحّى وتبعد ولا تكشف الحبّ إذا عبر خيالُ الحبيب؟ أنّى: كيف. تُشاح: تُصرف وتُنحّى.`,{'أنى':'كيف','تشاح':'تُصرف وتُنحّى'}],
+2:[`مشت أمامي متمايلةً في ليلة حالكة، وما حلوكها إلا من صنعها: فالقمر فوقي قد خسف، ولها في خسوفه يدٌ، إذ غلب حسنها نورَه فاحتجب؛ فأظلمت الليلة كلُّها إلا ما حولها، فلم يبقَ فيها نورٌ غير حسن نورها. الداجية: الليلة المظلمة. الخسوف: ذهاب ضوء القمر. الجناح: اليد، وفي لسان العرب: «وجناحُ الإنسانِ: يدُه»، و«لها بالخسوف جناح»، أي لها عليه قدرة، كما في الحديث: «لا يدانِ لأحدٍ بقتالهم».`,{'بداجية':'الليلة المظلمة','بالخسوف':'ذهاب ضوء القمر','جناح':'اليد. ولها بالخسوف جناح: أي لها عليه قدرة'}],
+3:[`أخفت القمر لأراها شمسًا في الليل، تسير منيرة والظلمة تحيط بها ولا تنال منها، فتزيدها حسنًا كما يزيد الوشاحُ الجيدَ؛ فكأنها عندما تسير في الليالي يكون الليل وشاحًا على جِيدها. الوشاح: نسيج عريض من أَدَم يُرصَّع بالجوهر. الجِيد: العنق.`,{'وشاح':'نسيج عريض من أَدَم يُرصَّع بالجوهر','لجيد':'الجِيد: العنق'}],
+4:[`لها عبق ورد مع نداه وهي تسير شمسًا (وندى الورد يكون عادةً في الصباح الباكر)، فكان ذلك صباحًا مجازيًّا قبل مجيء الصباح الحقيقي. قُبَيْل: تصغير قَبْل، أي قبله بقليل.`,{'قبيل':'تصغير قَبْل، أي قبله بقليل'}],
+5:[`تمشي متمهلة في سكون المساء، والرياحُ تعصف في قلبي وجدًا. الهُوَيْنى: التُّؤَدة والرِّفق، أي تسير على مَهَل. الهَدْء: الهدوء.`,{'الهوينى':'التُّؤَدة والرِّفق، أي تسير على مَهَل','بهدء':'الهَدْء: الهدوء'}]};
+const nk=s=>strip(s).replace(/[^\u0621-\u064A]/g,'');
+function rend(s){const w=(E[s.dataset.i]||[])[1]||{};s.innerHTML=s.dataset.f.split(' ').map(t=>{const m=w[nk(t)],u=tk?t:strip(t);return m?`<u class="w" data-m="${m}">${u}</u>`:u}).join(' ')}
 for(let i=0;i<40;i++){
  if(H[i]){const h=document.createElement('h2');h.textContent=H[i];L.append(h)}
  const d=document.createElement('div');d.className='v';d.tabIndex=0;
- d.innerHTML=`<div class="n">${(i+1).toLocaleString('ar-EG')}</div><div class="sh"><span class="s"></span><span class="s"></span></div><div class="m">${M[i]}</div>`;
- d.querySelectorAll('.s').forEach((s,j)=>{s.dataset.f=P[2*i+j];s.textContent=P[2*i+j]});
+ d.innerHTML=`<div class="n">${(i+1).toLocaleString('ar-EG')}</div><div class="sh"><span class="s"></span><span class="s"></span></div>${E[i]?`<div class="x${E[i][0].length>170?' long':''}"><div class="b">${E[i][0]}</div></div>`:`<div class="m">${M[i]}</div>`}`;
+ d.querySelectorAll('.s').forEach((s,j)=>{s.dataset.f=P[2*i+j];s.dataset.i=i;rend(s)});const x=d.querySelector('.x');if(x)x.onmouseenter=x.onclick=ev=>{ev.stopPropagation();x.classList.add('full')};
  const go=()=>{seek(C.find(c=>c[0]==i)[1]);d.classList.toggle('open');if(!ready&&!playing)toggle()};
  d.onclick=go;d.onkeydown=e=>{if(e.key=='Enter')go()};L.append(d);V.push(d)}
 let yt,ready=false,sim=0,last=0,playing=false,act=-1,sp=0;
@@ -161,8 +176,12 @@ function tick(now){
  sky(playing?(vi+f)/40:sp);requestAnimationFrame(tick)}
 addEventListener('scroll',()=>{sp=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)},{passive:true});
 pl.onclick=toggle;rg.oninput=()=>seek(+rg.value);
-document.getElementById('tk').onclick=()=>{tk=!tk;document.querySelectorAll('.s').forEach(s=>s.textContent=tk?s.dataset.f:strip(s.dataset.f))};
+document.getElementById('tk').onclick=()=>{tk=!tk;document.querySelectorAll('.s').forEach(rend)};
 let fs=1.7;const fz=d=>R.setProperty('--fs',(fs=Math.min(2.6,Math.max(1.1,fs+d)))+'rem');
 document.getElementById('fp').onclick=()=>fz(.15);document.getElementById('fm').onclick=()=>fz(-.15);
 requestAnimationFrame(tick);
+const tip=document.createElement('div');tip.id='tip';document.body.append(tip);
+function showTip(w){tip.textContent=w.dataset.m;tip.style.display='block';const r=w.getBoundingClientRect();tip.style.top=(r.bottom+8)+'px';tip.style.left=Math.max(8,Math.min(innerWidth-tip.offsetWidth-8,r.left+r.width/2-tip.offsetWidth/2))+'px'}
+document.addEventListener('mouseover',e=>{const w=e.target.closest('.w');if(w)showTip(w);else tip.style.display='none'});
+document.addEventListener('click',e=>{const w=e.target.closest('.w');if(w){e.stopPropagation();showTip(w)}else tip.style.display='none'},true);
 </script></body></html>
